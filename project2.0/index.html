@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mindle - Self Learning Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <i class="bi bi-book-half fs-2 me-2"></i>
+          <span>Mindle</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#methods">Learning Methods</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Theme
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="light-theme">Light Theme</a></li>
+                <li><a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a></li>
+              </ul>
+            </li>
+            <li class="nav-item ms-2">
+              <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+            </li>
+            <li class="nav-item ms-2">
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+      <div class="container h-100 d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-8 text-start">
+            <h1 class="display-3 fw-bold mb-4">Unlock Your Learning Potential</h1>
+            <p class="lead mb-4">Discover personalized learning paths, interactive content, and a supportive community to help you master any subject at your own pace.</p>
+            <button class="btn btn-lg btn-primary px-5 py-3" id="get-started" onclick="window.location.href='dashboard.html'">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Learning Methods Section -->
+    <section id="methods" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold section-title">Effective Learning Methods</h2>
+          <p class="lead mt-4">Discover different approaches to enhance your learning experience</p>
+        </div>
+        <div class="row g-4" id="methods-container">
+          <!-- Methods will be dynamically loaded from JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <h2 class="display-5 fw-bold mb-4 section-title">About Mindle</h2>
+            <p class="lead mt-4">We're passionate about making education accessible, engaging, and effective for everyone.</p>
+            <p>Mindle was founded by a team of educators and technologists who believe that everyone deserves access to high-quality learning resources. Our platform combines cutting-edge educational research with intuitive design to create a learning experience that adapts to your unique needs.</p>
+            <p>Whether you're a student, professional, or lifelong learner, our mission is to help you achieve your educational goals through personalized learning paths and proven study methods.</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="about-image-container">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" alt="Students learning together" class="img-fluid rounded">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold section-title">Get in Touch</h2>
+          <p class="lead mt-4">Have questions or feedback? We'd love to hear from you!</p>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6">
+            <div class="card contact-card">
+              <div class="card-body p-4">
+                <form id="contact-form">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <a class="navbar-brand d-inline-flex align-items-center" href="#">
+              <i class="bi bi-book-half fs-3 me-2"></i>
+              <span>Mindle</span>
+            </a>
+            <p class="mt-2 mb-0">© 2025 Mindle. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <div class="social-links">
+              <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="me-3"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Login to Mindle</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="login-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="login-email" required>
+              </div>
+              <div class="mb-3">
+                <label for="login-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="login-password" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me">
+                <label class="form-check-label" for="remember-me">Remember me</label>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <div class="text-center mt-3">
+              <a href="#" class="text-decoration-none">Forgot password?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create an Account</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="signup-form">
+              <div class="mb-3">
+                <label for="signup-name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="signup-name" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="signup-email" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="signup-password" required>
+              </div>
+              <div class="mb-3">
+                <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="signup-confirm-password" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms" required>
+                <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- User Profile Dropdown Template (Hidden) -->
+    <template id="user-profile-template">
+      <li class="nav-item dropdown ms-2 user-profile-dropdown">
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+          <img src="" alt="Profile" class="rounded-circle me-2" width="32" height="32" id="user-avatar">
+          <span id="user-name"></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-journal-text"></i> My Courses</a></li>
+          <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" id="logout-button"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+      </li>
+    </template>
+
+    <!-- Additional CSS for Particles and Notifications -->
+    <style>
+      /* Theme transition */
+      .theme-transition {
+        transition: all 0.8s ease;
+      }
+      
+      /* Particles for dark theme */
+      .particles-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+      }
+      
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.6;
+        animation: float linear infinite;
+      }
+      
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-20px) translateX(10px) rotate(90deg);
+        }
+        50% {
+          transform: translateY(0) translateX(20px) rotate(180deg);
+        }
+        75% {
+          transform: translateY(20px) translateX(10px) rotate(270deg);
+        }
+        100% {
+          transform: translateY(0) translateX(0) rotate(360deg);
+        }
+      }
+      
+      /* Custom Notifications */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        background-color: var(--card-bg);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        max-width: 350px;
+      }
+      
+      .notification.show {
+        transform: translateX(0);
+      }
+      
+      .notification-content {
+        display: flex;
+        align-items: center;
+      }
+      
+      .notification-content i {
+        font-size: 1.5rem;
+        margin-right: 15px;
+      }
+      
+      .notification-content p {
+        margin: 0;
+      }
+      
+      .notification-success {
+        border-left: 4px solid var(--primary-color);
+      }
+      
+      .notification-success i {
+        color: var(--primary-color);
+      }
+      
+      .notification-error {
+        border-left: 4px solid #ff3860;
+      }
+      
+      .notification-error i {
+        color: #ff3860;
+      }
+      
+      .notification-info {
+        border-left: 4px solid #3298dc;
+      }
+      
+      .notification-info i {
+        color: #3298dc;
+      }
+
+      /* Method card styles */
+      .method-card {
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .method-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+      
+      .method-icon {
+        margin-bottom: 1rem;
+      }
+      
+      .method-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 3px solid var(--primary-color);
+        padding: 2px;
+        background-color: var(--card-bg);
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

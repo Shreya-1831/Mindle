@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Recommendations - Mindle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./course-recommendation.css">
+  </head>
+  <body>
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <i class="bi bi-book-half fs-2 me-2"></i>
+          <span>Mindle</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Theme
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="light-theme">Light Theme</a></li>
+                <li><a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle me-1"></i>
+                <span id="user-name">John Doe</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="profile-link"><i class="bi bi-person me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="#" id="settings-link"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Course Recommendation Content -->
+    <div class="recommendation-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="recommendation-card">
+              <div class="recommendation-header">
+                <h1>Course Recommendations</h1>
+                <p class="lead">Discover the best courses tailored to your learning needs</p>
+              </div>
+              
+              <div class="recommendation-body">
+                <div class="search-section mb-5">
+                  <h2 class="mb-4">Find Your Perfect Course</h2>
+                  <form id="course-search-form">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="course-topic" class="form-label">Course Topic</label>
+                        <input type="text" class="form-control" id="course-topic" placeholder="e.g., Machine Learning, Web Development, Data Science" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="difficulty-level" class="form-label">Difficulty Level</label>
+                        <select class="form-select" id="difficulty-level">
+                          <option value="any" selected>Any Level</option>
+                          <option value="beginner">Beginner</option>
+                          <option value="intermediate">Intermediate</option>
+                          <option value="advanced">Advanced</option>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="course-duration" class="form-label">Duration</label>
+                        <select class="form-select" id="course-duration">
+                          <option value="any" selected>Any Duration</option>
+                          <option value="short">Short (< 4 weeks)</option>
+                          <option value="medium">Medium (1-3 months)</option>
+                          <option value="long">Long (> 3 months)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <label class="form-label">Preferred Platforms</label>
+                        <div class="platform-selector">
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="coursera" value="coursera" checked>
+                            <label class="btn platform-btn" for="coursera">Coursera</label>
+                          </div>
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="udemy" value="udemy" checked>
+                            <label class="btn platform-btn" for="udemy">Udemy</label>
+                          </div>
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="edx" value="edx" checked>
+                            <label class="btn platform-btn" for="edx">edX</label>
+                          </div>
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="stanford" value="stanford" checked>
+                            <label class="btn platform-btn" for="stanford">Stanford</label>
+                          </div>
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="harvard" value="harvard" checked>
+                            <label class="btn platform-btn" for="harvard">Harvard</label>
+                          </div>
+                          <div class="platform-item">
+                            <input type="checkbox" class="btn-check" id="kaggle" value="kaggle" checked>
+                            <label class="btn platform-btn" for="kaggle">Kaggle</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Additional Preferences</label>
+                        <div class="preference-selector">
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="free-courses" checked>
+                            <label class="form-check-label" for="free-courses">
+                              Include free courses
+                            </label>
+                          </div>
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="certificate-courses" checked>
+                            <label class="form-check-label" for="certificate-courses">
+                              Courses with certificates
+                            </label>
+                          </div>
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="project-based" checked>
+                            <label class="form-check-label" for="project-based">
+                              Project-based learning
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center mt-4">
+                      <button type="submit" class="btn btn-primary btn-lg" id="find-courses-btn">
+                        <i class="bi bi-search me-2"></i>Find Courses
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                
+                <div id="loading-indicator" class="text-center py-5" style="display: none;">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="mt-3">Searching for the best courses for you...</p>
+                </div>
+                
+                <div id="recommendations-section" style="display: none;">
+                  <div class="section-divider mb-4">
+                    <h2 class="section-title">Recommended Courses</h2>
+                    <p class="text-muted">Based on your preferences</p>
+                  </div>
+                  
+                  <div class="filter-bar mb-4">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <div class="search-results-info">
+                          <p><span id="results-count">0</span> courses found</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex justify-content-md-end">
+                          <div class="me-3">
+                            <label for="sort-by" class="form-label mb-0">Sort by:</label>
+                            <select class="form-select form-select-sm" id="sort-by">
+                              <option value="relevance">Relevance</option>
+                              <option value="rating">Rating</option>
+                              <option value="newest">Newest</option>
+                            </select>
+                          </div>
+                          <div>
+                            <button class="btn btn-outline-primary btn-sm" id="save-recommendations">
+                              <i class="bi bi-bookmark me-1"></i>Save All
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div id="course-cards-container" class="row g-4">
+                    <!-- Course cards will be dynamically added here -->
+                  </div>
+                  
+                  <div class="text-center mt-5">
+                    <button class="btn btn-outline-primary" id="load-more-btn">
+                      <i class="bi bi-plus-circle me-2"></i>Load More Courses
+                    </button>
+                  </div>
+                </div>
+                
+                <div id="no-results" class="text-center py-5" style="display: none;">
+                  <i class="bi bi-search fs-1 text-muted"></i>
+                  <h3 class="mt-3">No courses found</h3>
+                  <p class="text-muted">Try adjusting your search criteria or explore different topics</p>
+                  <button class="btn btn-primary mt-3" id="reset-search-btn">
+                    <i class="bi bi-arrow-counterclockwise me-2"></i>Reset Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course Detail Modal -->
+    <div class="modal fade" id="courseDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="course-modal-title">Course Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="course-detail-content">
+              <!-- Course details will be dynamically added here -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-primary" id="save-course-btn">
+              <i class="bi bi-bookmark me-2"></i>Save Course
+            </button>
+            <a href="#" class="btn btn-primary" id="enroll-course-btn" target="_blank">
+              <i class="bi bi-box-arrow-up-right me-2"></i>Go to Course
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./course-recommendation.js"></script>
+  </body>
+</html>

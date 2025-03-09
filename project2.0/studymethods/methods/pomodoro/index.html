@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Timer - Mindle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Light theme (pastel colors) - default */
+        --primary-color: #7e9eff;
+        --secondary-color: #ffa69e;
+        --accent-color: #b8e0d2;
+        --background-color: #f8f9fa;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --navbar-bg: rgba(255, 255, 255, 0.95);
+        --navbar-text: #333333;
+        --hero-overlay: rgba(255, 255, 255, 0.7);
+        --method-icon-bg: #eef2ff;
+        --method-icon-color: var(--primary-color);
+        --footer-bg: #f0f2f5;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --btn-hover: #6a85e0;
+        --glow-color: rgba(126, 158, 255, 0.6);
+        --heading-font: 'Caveat', cursive;
+        --body-font: 'Kalam', cursive;
+        --alt-font: 'Architects Daughter', cursive;
+        --page-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      }
+
+      [data-bs-theme="dark"] {
+        /* Dark theme (neon colors) */
+        --primary-color: #00ffcc;
+        --secondary-color: #ff00ff;
+        --accent-color: #00ccff;
+        --background-color: #121212;
+        --card-bg: #1e1e1e;
+        --text-color: #f0f0f0;
+        --navbar-bg: rgba(18, 18, 18, 0.95);
+        --navbar-text: #f0f0f0;
+        --hero-overlay: rgba(0, 0, 0, 0.7);
+        --method-icon-bg: #2a2a2a;
+        --method-icon-color: var(--primary-color);
+        --footer-bg: #1a1a1a;
+        --card-shadow: 0 4px 12px rgba(0, 255, 204, 0.15);
+        --btn-hover: #00e6b8;
+        --glow-color: rgba(0, 255, 204, 0.6);
+        --page-bg: linear-gradient(135deg, #121212 0%, #121212 100%);
+      }
+
+      body {
+        font-family: var(--body-font);
+        color: var(--text-color);
+        background: var(--page-bg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        letter-spacing: 0.02rem;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 56px;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        background-color: var(--navbar-bg);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+      }
+
+      .navbar-brand {
+        color: var(--primary-color);
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        font-size: 2rem;
+        font-family: var(--heading-font);
+      }
+
+      .navbar-brand i {
+        color: var(--primary-color);
+        filter: drop-shadow(0 0 5px var(--glow-color));
+      }
+
+      .nav-link {
+        color: var(--navbar-text);
+        font-weight: 500;
+        transition: all 0.2s ease;
+        position: relative;
+        padding: 0.5rem 1rem;
+        margin: 0 0.2rem;
+        font-family: var(--alt-font);
+        font-size: 1.1rem;
+      }
+
+      .nav-link:hover, .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: var(--primary-color);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-link:hover::after, .nav-link.active::after {
+        width: 80%;
+        box-shadow: 0 0 8px var(--glow-color);
+      }
+
+      /* Dropdown styling */
+      .dropdown-menu {
+        background-color: var(--card-bg);
+        border: none;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        padding: 0.5rem;
+      }
+
+      .dropdown-item {
+        color: var(--text-color);
+        font-family: var(--alt-font);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s ease;
+      }
+
+      .dropdown-item:hover {
+        background-color: var(--method-icon-bg);
+        color: var(--primary-color);
+      }
+
+      /* Timer Container */
+      .timer-container {
+        width: 100%;
+        max-width: 500px;
+        background-color: var(--card-bg);
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .timer-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      [data-bs-theme="dark"] .timer-container:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Timer Header */
+      .timer-header {
+        margin-bottom: 25px;
+      }
+
+      .timer-header h1 {
+        font-family: var(--heading-font);
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px var(--glow-color);
+      }
+
+      /* Timer Controls */
+      .timer-controls {
+        margin: 20px 0;
+      }
+
+      .timer-controls label {
+        display: block;
+        margin-bottom: 8px;
+        font-family: var(--alt-font);
+        font-weight: 500;
+      }
+
+      .timer-controls input {
+        width: 100px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: var(--body-font);
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .timer-controls input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px var(--glow-color);
+      }
+
+      [data-bs-theme="dark"] .timer-controls input {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Timer Display */
+      .timer-display {
+        margin: 30px 0;
+      }
+
+      .timer-display h2 {
+        font-family: var(--heading-font);
+        font-size: 4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-shadow: 0 0 15px var(--glow-color);
+        margin: 0;
+        transition: all 0.3s ease;
+      }
+
+      /* Timer Buttons */
+      .timer-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .timer-btn {
+        padding: 12px 25px;
+        border-radius: 12px;
+        border: none;
+        font-family: var(--alt-font);
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .timer-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: all 0.6s ease;
+        z-index: -1;
+      }
+
+      .timer-btn:hover::before {
+        left: 100%;
+      }
+
+      .start-btn {
+        background-color: var(--primary-color);
+        color: #fff;
+      }
+
+      .start-btn:hover {
+        background-color: var(--btn-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px var(--glow-color);
+      }
+
+      .stop-btn {
+        background-color: #f44336;
+        color: #fff;
+      }
+
+      .stop-btn:hover {
+        background-color: #e53935;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(244, 67, 54, 0.4);
+      }
+
+      .reset-btn {
+        background-color: #ffa500;
+        color: #fff;
+      }
+
+      .reset-btn:hover {
+        background-color: #ff8c00;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(255, 165, 0, 0.4);
+      }
+
+      /* Session Status */
+      .session-status {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        font-family: var(--alt-font);
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .study-session {
+        background-color: rgba(126, 158, 255, 0.1);
+        color: var(--primary-color);
+      }
+
+      .break-session {
+        background-color: rgba(255, 165, 0, 0.1);
+        color: #ffa500;
+      }
+
+      /* Progress Bar */
+      .progress {
+        height: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        background-color: rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      [data-bs-theme="dark"] .progress {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .progress-bar {
+        background-color: var(--primary-color);
+        transition: width 1s linear;
+      }
+
+      .break-progress .progress-bar {
+        background-color: #ffa500;
+      }
+
+      /* Notification Container */
+      #notification-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+
+      .notification {
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        border-radius: 10px;
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        box-shadow: var(--card-shadow);
+        display: flex;
+        align-items: center;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        max-width: 350px;
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      .notification i {
+        font-size: 1.5rem;
+        margin-right: 15px;
+      }
+
+      .notification-success i {
+        color: #4caf50;
+      }
+
+      .notification-error i {
+        color: #f44336;
+      }
+
+      .notification-info i {
+        color: var(--primary-color);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 576px) {
+        .timer-container {
+          padding: 20px;
+          margin: 0 15px;
+        }
+
+        .timer-header h1 {
+          font-size: 2rem;
+        }
+
+        .timer-display h2 {
+          font-size: 3rem;
+        }
+
+        .timer-buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .timer-btn {
+          width: 100%;
+        }
+      }
+
+      /* Theme transition */
+      .theme-transition {
+        transition: background-color 1s ease, color 1s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <i class="bi bi-book-half fs-2 me-2"></i>
+          <span>Mindle</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Study Timer</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Theme
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="light-theme">Light Theme</a></li>
+                <li><a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle me-1"></i>
+                <span id="user-name">John Doe</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="profile-link"><i class="bi bi-person me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="#" id="settings-link"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Timer Container -->
+    <div class="container d-flex justify-content-center align-items-center">
+      <div class="timer-container">
+        <div class="timer-header">
+          <h1><i class="bi bi-alarm me-2"></i>Study Timer</h1>
+          <p class="text-muted">Focus on your studies with timed sessions</p>
+        </div>
+        
+        <div class="timer-controls">
+          <label for="study-duration">Set Study Session Duration (20-120 mins)</label>
+          <input type="number" id="study-duration" min="20" max="120" value="25">
+        </div>
+        
+        <div class="timer-controls">
+          <label for="break-duration">Set Break Duration (5-30 mins)</label>
+          <input type="number" id="break-duration" min="5" max="30" value="5">
+        </div>
+        
+        <div class="timer-display">
+          <h2 id="timer-display">25:00</h2>
+        </div>
+        
+        <div id="session-status" class="session-status study-session">
+          <p class="mb-0"><i class="bi bi-book me-2"></i>Study Session</p>
+          <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%"></div>
+          </div>
+        </div>
+        
+        <div class="timer-buttons">
+          <button id="start-btn" class="timer-btn start-btn">
+            <i class="bi bi-play-fill me-2"></i>START
+          </button>
+          <button id="stop-btn" class="timer-btn stop-btn">
+            <i class="bi bi-pause-fill me-2"></i>STOP
+          </button>
+          <button id="reset-btn" class="timer-btn reset-btn">
+            <i class="bi bi-arrow-counterclockwise me-2"></i>RESET
+          </button>
+        </div>
+        
+        <div class="mt-4">
+          <p class="text-muted small">Sessions completed: <span id="sessions-completed">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Theme Switching Functionality
+        const lightThemeBtn = document.getElementById('light-theme');
+        const darkThemeBtn = document.getElementById('dark-theme');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+        
+        // Theme switcher functions
+        lightThemeBtn.addEventListener('click', () => {
+          setTheme('light');
+        });
+        
+        darkThemeBtn.addEventListener('click', () => {
+          setTheme('dark');
+        });
+        
+        function setTheme(theme) {
+          htmlElement.setAttribute('data-bs-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          // Add animation for theme change
+          document.body.classList.add('theme-transition');
+          setTimeout(() => {
+            document.body.classList.remove('theme-transition');
+          }, 1000);
+        }
+        
+        // Set user name in navbar
+        const userNameElement = document.getElementById('user-name');
+        const userName = localStorage.getItem('userName') || 'John Doe';
+        userNameElement.textContent = userName;
+        
+        // Timer functionality
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const timerDisplay = document.getElementById('timer-display');
+        const studyDurationInput = document.getElementById('study-duration');
+        const breakDurationInput = document.getElementById('break-duration');
+        const sessionStatus = document.getElementById('session-status');
+        const progressBar = document.getElementById('progress-bar');
+        const sessionsCompleted = document.getElementById('sessions-completed');
+        
+        let timerInterval;
+        let remainingTime;
+        let isTimerRunning = false;
+        let isStudySession = true;
+        let studySessionsCompleted = 0;
+        let initialStudyTime;
+        let initialBreakTime;
+        let totalTime;
+        
+        // Update timer display
+        function updateTimerDisplay() {
+          const minutes = Math.floor(remainingTime / 60);
+          const seconds = remainingTime % 60;
+          timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+          
+          // Update progress bar
+          const elapsedTime = totalTime - remainingTime;
+          const progressPercentage = (elapsedTime / totalTime) * 100;
+          progressBar.style.width = `${progressPercentage}%`;
+        }
+        
+        // Start timer
+        function startTimer() {
+          if (isTimerRunning) return;
+          
+          // Get duration values
+          const studyDuration = parseInt(studyDurationInput.value, 10);
+          const breakDuration = parseInt(breakDurationInput.value, 10);
+          
+          // Validate inputs
+          if (studyDuration < 20 || studyDuration > 120) {
+            showNotification('Study duration must be between 20 and 120 minutes', 'error');
+            studyDurationInput.value = 25;
+            return;
+          }
+          
+          if (breakDuration < 5 || breakDuration > 30) {
+            showNotification('Break duration must be between 5 and 30 minutes', 'error');
+            breakDurationInput.value = 5;
+            return;
+          }
+          
+          // Set initial times
+          initialStudyTime = studyDuration * 60;
+          initialBreakTime = breakDuration * 60;
+          
+          // Set remaining time based on current session type
+          if (!remainingTime) {
+            remainingTime = isStudySession ? initialStudyTime : initialBreakTime;
+          }
+          
+          // Set total time for progress calculation
+          totalTime = isStudySession ? initialStudyTime : initialBreakTime;
+          
+          isTimerRunning = true;
+          
+          // Update UI
+          startBtn.disabled = true;
+          studyDurationInput.disabled = true;
+          breakDurationInput.disabled = true;
+          
+          // Show notification
+          showNotification(`${isStudySession ? 'Study' : 'Break'} session started`, 'info');
+          
+          // Start interval
+          timerInterval = setInterval(() => {
+            remainingTime--;
+            updateTimerDisplay();
+            
+            if (remainingTime <= 0) {
+              clearInterval(timerInterval);
+              isTimerRunning = false;
+              
+              // Play sound
+              playSound();
+              
+              if (isStudySession) {
+                // Switch to break session
+                studySessionsCompleted++;
+                sessionsCompleted.textContent = studySessionsCompleted;
+                
+                isStudySession = false;
+                remainingTime = initialBreakTime;
+                totalTime = initialBreakTime;
+                
+                // Update UI for break session
+                sessionStatus.className = 'session-status break-session';
+                sessionStatus.innerHTML = `
+                  <p class="mb-0"><i class="bi bi-cup-hot me-2"></i>Break Time</p>
+                  <div class="progress break-progress">
+                    <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%"></div>
+                  </div>
+                `;
+                
+                // Update progress bar reference
+                progressBar = document.getElementById('progress-bar');
+                
+                // Show notification
+                if (studySessionsCompleted >= 4) {
+                  showNotification('Great job! You\'ve completed 4 study sessions. Consider taking a longer break.', 'success');
+                } else {
+                  showNotification('Study session complete! Time for a break.', 'success');
+                }
+                
+                // Auto-start break session
+                startBtn.disabled = false;
+                updateTimerDisplay();
+                
+              } else {
+                // Switch to study session
+                isStudySession = true;
+                remainingTime = initialStudyTime;
+                totalTime = initialStudyTime;
+                
+                // Update UI for study session
+                sessionStatus.className = 'session-status study-session';
+                sessionStatus.innerHTML = `
+                  <p class="mb-0"><i class="bi bi-book me-2"></i>Study Session</p>
+                  <div class="progress">
+                    <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%"></div>
+                  </div>
+                `;
+                
+                // Update progress bar reference
+                progressBar = document.getElementById('progress-bar');
+                
+                // Show notification
+                showNotification('Break time over! Ready to study again?', 'info');
+                
+                // Auto-start study session
+                startBtn.disabled = false;
+                updateTimerDisplay();
+              }
+            }
+          }, 1000);
+        }
+        
+        // Stop timer
+        function stopTimer() {
+          if (!isTimerRunning) return;
+          
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          
+          // Update UI
+          startBtn.disabled = false;
+          
+          // Show notification
+          showNotification(`${isStudySession ? 'Study' : 'Break'} session paused`, 'info');
+        }
+        
+        // Reset timer
+        function resetTimer() {
+          clearInterval(timerInterval);
+          isTimerRunning = false;
+          isStudySession = true;
+          
+          // Reset to study session
+          const studyDuration = parseInt(studyDurationInput.value, 10);
+          remainingTime = studyDuration * 60;
+          totalTime = remainingTime;
+          
+          // Update UI
+          startBtn.disabled = false;
+          studyDurationInput.disabled = false;
+          breakDurationInput.disabled = false;
+          
+          // Reset session status
+          sessionStatus.className = 'session-status study-session';
+          sessionStatus.innerHTML = `
+            <p class="mb-0"><i class="bi bi-book me-2"></i>Study Session</p>
+            <div class="progress">
+              <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%"></div>
+            </div>
+          `;
+          
+          // Update progress bar reference
+          progressBar = document.getElementById('progress-bar');
+          
+          // Update display
+          updateTimerDisplay();
+          
+          // Show notification
+          showNotification('Timer reset', 'info');
+        }
+        
+        // Play sound when timer ends
+        function playSound() {
+          const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
+          audio.play();
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+          const container = document.getElementById('notification-container');
+          
+          // Create notification element
+          const notification = document.createElement('div');
+          notification.className = `notification notification-${type}`;
+          
+          // Set icon based on type
+          let icon = 'bi-info-circle';
+          if (type === 'success') icon = 'bi-check-circle';
+          if (type === 'error') icon = 'bi-exclamation-circle';
+          
+          // Set content
+          notification.innerHTML = `
+            <i class="bi ${icon}"></i>
+            <p class="mb-0">${message}</p>
+          `;
+          
+          // Add to container
+          container.appendChild(notification);
+          
+          // Show notification with animation
+          setTimeout(() => {
+            notification.classList.add('show');
+          }, 10);
+          
+          // Remove after delay
+          setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+              notification.remove();
+            }, 300);
+          }, 5000);
+        }
+        
+        // Event listeners
+        startBtn.addEventListener('click', startTimer);
+        stopBtn.addEventListener('click', stopTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        
+        // Update timer display when study duration changes
+        studyDurationInput.addEventListener('change', () => {
+          if (!isTimerRunning && isStudySession) {
+            const studyDuration = parseInt(studyDurationInput.value, 10);
+            
+            // Validate input
+            if (studyDuration < 20) {
+              studyDurationInput.value = 20;
+              showNotification('Minimum study duration is 20 minutes', 'error');
+            } else if (studyDuration > 120) {
+              studyDurationInput.value = 120;
+              showNotification('Maximum study duration is 120 minutes', 'error');
+            }
+            
+            remainingTime = parseInt(studyDurationInput.value, 10) * 60;
+            totalTime = remainingTime;
+            updateTimerDisplay();
+          }
+        });
+        
+        // Initialize timer display
+        remainingTime = parseInt(studyDurationInput.value, 10) * 60;
+        totalTime = remainingTime;
+        updateTimerDisplay();
+      });
+    </script>
+  </body>
+</html>

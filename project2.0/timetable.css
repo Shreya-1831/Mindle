@@ -1,0 +1,377 @@
+/* Timetable Specific Styles */
+.timetable-container {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    min-height: 100vh;
+  }
+  
+  .timetable-card {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .timetable-header {
+    padding: 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgba(126, 158, 255, 0.1), rgba(184, 224, 210, 0.1));
+  }
+  
+  [data-bs-theme="dark"] .timetable-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(0, 204, 255, 0.1));
+  }
+  
+  .timetable-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+  }
+  
+  .timetable-body {
+    padding: 40px;
+  }
+  
+  /* Timetable Info */
+  .timetable-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+  
+  .info-item i {
+    font-size: 1.3rem;
+    margin-right: 8px;
+    color: var(--primary-color);
+  }
+  
+  /* Timetable Table */
+  .timetable-table {
+    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  [data-bs-theme="dark"] .timetable-table {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .timetable-table th {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    font-family: var(--alt-font);
+  }
+  
+  .timetable-table td {
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 100px;
+    vertical-align: top;
+  }
+  
+  [data-bs-theme="dark"] .timetable-table td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .time-cell {
+    width: 100px;
+    text-align: center;
+    font-weight: 600;
+    padding: 10px !important;
+    background-color: var(--background-color);
+    vertical-align: middle !important;
+  }
+  
+  .day-cell {
+    width: calc((100% - 100px) / 7);
+    transition: all 0.2s ease;
+  }
+  
+  .day-cell.unavailable {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  [data-bs-theme="dark"] .day-cell.unavailable {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .day-cell.has-session {
+    cursor: pointer;
+  }
+  
+  .day-cell.has-session:hover {
+    background-color: rgba(126, 158, 255, 0.1);
+  }
+  
+  /* Session Item */
+  .session-item {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+  }
+  
+  .session-course {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-family: var(--heading-font);
+  }
+  
+  .session-method {
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+  
+  .session-topic {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-style: italic;
+  }
+  
+  /* Session colors based on method */
+  .session-pomodoro {
+    border-left: 4px solid #ff6b6b;
+  }
+  
+  .session-active-recall {
+    border-left: 4px solid #4ecdc4;
+  }
+  
+  .session-feynman {
+    border-left: 4px solid #ffd166;
+  }
+  
+  .session-mind-mapping {
+    border-left: 4px solid #6a0572;
+  }
+  
+  .session-spaced-repetition {
+    border-left: 4px solid #118ab2;
+  }
+  
+  .session-cornell {
+    border-left: 4px solid #073b4c;
+  }
+  
+  .session-sq3r {
+    border-left: 4px solid #06d6a0;
+  }
+  
+  .session-interleaved {
+    border-left: 4px solid #ef476f;
+  }
+  
+  /* Learning Tips */
+  .learning-tips {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .learning-tips li {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  [data-bs-theme="dark"] .learning-tips li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .learning-tips li:last-child {
+    border-bottom: none;
+  }
+  
+  .learning-tips li i {
+    margin-right: 10px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 2px;
+  }
+  
+  /* Study Methods */
+  .study-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .method-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    transition: all 0.2s ease;
+  }
+  
+  .method-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    flex-shrink: 0;
+  }
+  
+  .method-info {
+    flex-grow: 1;
+  }
+  
+  .method-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .method-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+  
+  /* Method icon backgrounds */
+  .method-pomodoro .method-icon {
+    background-color: #ff6b6b;
+  }
+  
+  .method-active-recall .method-icon {
+    background-color: #4ecdc4;
+  }
+  
+  .method-feynman .method-icon {
+    background-color: #ffd166;
+  }
+  
+  .method-mind-mapping .method-icon {
+    background-color: #6a0572;
+  }
+  
+  .method-spaced-repetition .method-icon {
+    background-color: #118ab2;
+  }
+  
+  .method-cornell .method-icon {
+    background-color: #073b4c;
+  }
+  
+  .method-sq3r .method-icon {
+    background-color: #06d6a0;
+  }
+  
+  .method-interleaved .method-icon {
+    background-color: #ef476f;
+  }
+  
+  /* Timer Display */
+  .timer-display {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: monospace;
+    color: var(--primary-color);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .timetable-header {
+      padding: 30px 20px;
+    }
+    
+    .timetable-body {
+      padding: 30px 20px;
+    }
+    
+    .timetable-header h1 {
+      font-size: 2.2rem;
+    }
+    
+    .timetable-info {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .timetable-actions {
+      margin-top: 20px;
+      text-align: left;
+    }
+  }
+  
+  /* Notification Styles */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+  }
+  
+  [data-bs-theme="dark"] .notification {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .notification.show {
+    transform: translateX(0);
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .notification-content i {
+    font-size: 1.5rem;
+    margin-right: 15px;
+  }
+  
+  .notification-content p {
+    margin: 0;
+  }
+  
+  .notification-success {
+    border-left: 4px solid #28a745;
+  }
+  
+  .notification-success i {
+    color: #28a745;
+  }
+  
+  .notification-error {
+    border-left: 4px solid #dc3545;
+  }
+  
+  .notification-error i {
+    color: #dc3545;
+  }
+  
+  .notification-info {
+    border-left: 4px solid var(--primary-color);
+  }
+  
+  .notification-info i {
+    color: var(--primary-color);
+  }

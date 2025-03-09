@@ -1,0 +1,203 @@
+/* Preferences Page Styles */
+.preferences-container {
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: var(--background-color);
+}
+
+.preferences-card {
+  background-color: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.preferences-header {
+  padding: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+[data-bs-theme="dark"] .preferences-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preferences-header h1 {
+  font-family: var(--heading-font);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.preferences-body {
+  padding: 30px;
+}
+
+/* Range slider styling */
+.range-container {
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.range-value {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.form-range {
+  height: 8px;
+}
+
+.form-range::-webkit-slider-thumb {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+.form-range::-moz-range-thumb {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Days selector styling */
+.days-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.day-item {
+  flex: 1;
+  min-width: 60px;
+}
+
+.day-btn {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+[data-bs-theme="dark"] .day-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-check:checked + .day-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* Study methods styling */
+.study-methods-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.method-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+  padding: 15px;
+}
+
+[data-bs-theme="dark"] .method-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.method-btn i {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-check:checked + .method-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px var(--glow-color);
+}
+
+.btn-check:checked + .method-btn i {
+  transform: scale(1.2);
+}
+
+/* AI options styling */
+.ai-options {
+  background-color: var(--background-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.form-switch .form-check-input {
+  width: 3em;
+  height: 1.5em;
+  margin-top: 0.2em;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.form-check-label {
+  font-family: var(--alt-font);
+  font-size: 1.1rem;
+}
+
+/* Action buttons */
+.preferences-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.preferences-actions .btn {
+  padding: 10px 25px;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .study-methods-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .preferences-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .preferences-actions .btn {
+    width: 100%;
+  }
+  
+  .days-selector {
+    justify-content: center;
+  }
+  
+  .day-item {
+    flex: 0 0 calc(25% - 8px);
+  }
+}

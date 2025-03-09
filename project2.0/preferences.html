@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Preferences - Mindle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Architects+Daughter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./preferences.css">
+  </head>
+  <body>
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <i class="bi bi-book-half fs-2 me-2"></i>
+          <span>Mindle</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                Theme
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="light-theme">Light Theme</a></li>
+                <li><a class="dropdown-item" href="#" id="dark-theme">Dark Theme</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-person-circle me-1"></i>
+                <span id="user-name">John Doe</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="profile-link"><i class="bi bi-person me-2"></i>Profile</a></li>
+                <li><a class="dropdown-item" href="#" id="settings-link"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" id="logout-link"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Preferences Content -->
+    <div class="preferences-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="preferences-card">
+              <div class="preferences-header">
+                <h1>Study Preferences</h1>
+                <p class="lead">Tell us about your study habits and preferences to create a personalized timetable</p>
+              </div>
+              
+              <div class="preferences-body">
+                <form id="preferences-form">
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <div class="form-group mb-3">
+                        <label for="timetable-name" class="form-label">Timetable Name</label>
+                        <input type="text" class="form-control" id="timetable-name" placeholder="e.g., Spring Semester 2025" required>
+                      </div>
+                      
+                      <div class="form-group mb-3">
+                        <label for="preferred-language" class="form-label">Preferred Language</label>
+                        <select class="form-select" id="preferred-language" required>
+                          <option value="" selected disabled>Select your preferred language</option>
+                          <option value="english">English</option>
+                          <option value="spanish">Spanish</option>
+                          <option value="french">French</option>
+                          <option value="german">German</option>
+                          <option value="chinese">Chinese</option>
+                          <option value="japanese">Japanese</option>
+                          <option value="korean">Korean</option>
+                          <option value="hindi">Hindi</option>
+                          <option value="arabic">Arabic</option>
+                          <option value="russian">Russian</option>
+                          <option value="portuguese">Portuguese</option>
+                        </select>
+                      </div>
+                      
+                      <div class="form-group mb-3">
+                        <label for="domain" class="form-label">Learning Domain</label>
+                        <select class="form-select" id="domain" required>
+                          <option value="" selected disabled>Select your learning domain</option>
+                          <option value="computer_science">Computer Science</option>
+                          <option value="data_science">Data Science</option>
+                          <option value="web_development">Web Development</option>
+                          <option value="mobile_development">Mobile App Development</option>
+                          <option value="artificial_intelligence">Artificial Intelligence</option>
+                          <option value="mathematics">Mathematics</option>
+                          <option value="physics">Physics</option>
+                          <option value="chemistry">Chemistry</option>
+                          <option value="biology">Biology</option>
+                          <option value="business">Business & Management</option>
+                          <option value="languages">Languages</option>
+                          <option value="arts">Arts & Design</option>
+                          <option value="music">Music</option>
+                          <option value="health">Health & Medicine</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group mb-3">
+                        <label for="total-hours" class="form-label">Total Study Hours per Week</label>
+                        <div class="range-container">
+                          <input type="range" class="form-range" id="total-hours" min="5" max="40" step="1" value="20">
+                          <div class="range-value"><span id="hours-value">20</span> hours</div>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group mb-3">
+                        <label for="study-preferences" class="form-label">Study Time Preference</label>
+                        <select class="form-select" id="study-preferences" required>
+                          <option value="" selected disabled>When do you prefer to study?</option>
+                          <option value="morning">Morning Person (Early study sessions)</option>
+                          <option value="evening">Evening Person (Later study sessions)</option>
+                          <option value="distributed">Distributed (Spread throughout the day)</option>
+                          <option value="blocked">Blocked (Concentrated study periods)</option>
+                        </select>
+                      </div>
+                      
+                      <div class="form-group mb-3">
+                        <label class="form-label">Days Available for Study</label>
+                        <div class="days-selector">
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="monday" value="monday" checked>
+                            <label class="btn day-btn" for="monday">Mon</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="tuesday" value="tuesday" checked>
+                            <label class="btn day-btn" for="tuesday">Tue</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="wednesday" value="wednesday" checked>
+                            <label class="btn day-btn" for="wednesday">Wed</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="thursday" value="thursday" checked>
+                            <label class="btn day-btn" for="thursday">Thu</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="friday" value="friday" checked>
+                            <label class="btn day-btn" for="friday">Fri</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="saturday" value="saturday">
+                            <label class="btn day-btn" for="saturday">Sat</label>
+                          </div>
+                          <div class="day-item">
+                            <input type="checkbox" class="btn-check" id="sunday" value="sunday">
+                            <label class="btn day-btn" for="sunday">Sun</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group mb-4">
+                    <label for="study-methods" class="form-label">Preferred Study Methods</label>
+                    <p class="text-muted small">Select the methods that work best for you</p>
+                    <div class="study-methods-container">
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="pomodoro" value="pomodoro">
+                        <label class="btn method-btn" for="pomodoro">
+                          <i class="bi bi-clock"></i>
+                          <span>Pomodoro Technique</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="feynman" value="feynman">
+                        <label class="btn method-btn" for="feynman">
+                          <i class="bi bi-chat-quote"></i>
+                          <span>Feynman Technique</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="active_recall" value="active_recall">
+                        <label class="btn method-btn" for="active_recall">
+                          <i class="bi bi-card-checklist"></i>
+                          <span>Active Recall</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="spaced_repetition" value="spaced_repetition">
+                        <label class="btn method-btn" for="spaced_repetition">
+                          <i class="bi bi-calendar-week"></i>
+                          <span>Spaced Repetition</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="mind_mapping" value="mind_mapping">
+                        <label class="btn method-btn" for="mind_mapping">
+                          <i class="bi bi-diagram-3"></i>
+                          <span>Mind Mapping</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="cornell" value="cornell">
+                        <label class="btn method-btn" for="cornell">
+                          <i class="bi bi-journal-text"></i>
+                          <span>Cornell Note-Taking</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="sq3r" value="sq3r">
+                        <label class="btn method-btn" for="sq3r">
+                          <i class="bi bi-book"></i>
+                          <span>SQ3R Method</span>
+                        </label>
+                      </div>
+                      <div class="method-item">
+                        <input type="checkbox" class="btn-check" id="interleaved" value="interleaved">
+                        <label class="btn method-btn" for="interleaved">
+                          <i class="bi bi-shuffle"></i>
+                          <span>Interleaved Learning</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group mb-4">
+                    <label class="form-label">AI-Powered Recommendations</label>
+                    <div class="ai-options">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="ai-recommendations" checked>
+                        <label class="form-check-label" for="ai-recommendations">
+                          Use AI to optimize my timetable
+                        </label>
+                      </div>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="ai-course-suggestions" checked>
+                        <label class="form-check-label" for="ai-course-suggestions">
+                          Suggest courses based on my preferences
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="preferences-actions">
+                    <button type="button" class="btn btn-outline-secondary" id="back-btn">Back to Dashboard</button>
+                    <button type="submit" class="btn btn-primary" id="generate-timetable-btn">
+                      <i class="bi bi-calendar-plus me-2"></i>Generate Timetable
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./preferences.js"></script>
+  </body>
+</html>
